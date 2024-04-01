@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/Logo1.png" type="image/x-icon">
     <!-- Boostrap -->
-    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <title>Ruta Fit</title>
 </head>
 
@@ -19,37 +19,61 @@
             adipiscing fringilla sed eget feugiat in. Blandit semper in egestas nibh sit. Sit ultrices et vel tortor in
             morbi.</p>
         <br>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe width="560" height="315"
+        <div id="video-container" class="embed-responsive embed-responsive-16by9" style="display: none;">
+            <iframe id="video-frame" width="560" height="315"
                 src="https://www.youtube.com/embed/tfAveT1Hjcw?si=mtW9tNiiDI8l2rqL&amp;controls=0"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 
+
         <br>
         <br>
     </div>
     <div class="container-sm">
-        <form action="https://formsubmit.co/delahozpablo005@gmail.com" method="POST">
+
+        <form action="#" id="myForm">
             <h1 class="text-center">Formulario</h1>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div class="mb-3 form-group">
+                <label for="full_name" class="form-label">Nombre completo</label>
+                <div class="input-container">
+                    <input type="text" name="full_name" class="form-control" id="full_name"
+                        placeholder="Ingresa tu nombre completo">
+                </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 form-group">
+                <label for="email" class="form-label email">Dirección de correo electrónico</label>
+                <div class="input-container">
+                    <input type="email" name="email" class="form-control" id="email"
+                        placeholder="Ingresa tu correo electrónico">
+                </div>
+                <span class="error-txt email"></span> <!-- Aquí agregamos el elemento para mostrar mensajes de error -->
+            </div>
+
+            <div class="mb-3 form-group">
                 <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="tel" name="tel" class="form-control" id="telefono"
-                    placeholder="Ingresa tu número de teléfono">
+                <div class="input-container">
+                    <input type="tel" name="telefono" class="form-control" id="telefono"
+                        placeholder="Ingresa tu número de teléfono">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                <input type="text" name="text" class="form-control" id="exampleFormControlTextarea1" rows="3">
+            <div class="mb-3 form-group">
+                <label for="subject" class="form-label">Asunto</label>
+                <div class="input-container">
+                    <input type="text" name="subject" class="form-control" id="subject" placeholder="Ingresa el asunto">
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3 form-group">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <div class="input-container">
+                    <textarea name="mensaje" class="form-control" id="mensaje" rows="3"
+                        placeholder="Escribe tu mensaje"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
+
 
         <br>
         <div class="container-sm">
@@ -57,11 +81,15 @@
                 <button class="btn btn-primary" type="button">Button</button>
             </div>
             <br>
-            <p class="text-center">Después del Video, si cumples con los requisitos podrás agendar una llamada con mi equipo para evaluar-sin costo-si podemos ayudarte.</p>
+            <p class="text-center">Después del Video, si cumples con los requisitos podrás agendar una llamada con mi
+                equipo para evaluar-sin costo-si podemos ayudarte.</p>
             <br>
             <h1 class="text-center">Formulario</h1>
             <br>
-            <p class="text-center">Si No eres una Marca Personal o un Negocio de Servicios que ya factura entre $1,000 0 $2,000 USD por favor no te agendes porque no podemos ayudarte y cancelaremos tu llamada.Tampoco te agendes si eres un negocio local, negocios que venden productos físicos, networkers (Que vendan productos), E-commerce, personas que estén comenzando su negocio.</p>
+            <p class="text-center">Si No eres una Marca Personal o un Negocio de Servicios que ya factura entre $1,000 0
+                $2,000 USD por favor no te agendes porque no podemos ayudarte y cancelaremos tu llamada.Tampoco te
+                agendes si eres un negocio local, negocios que venden productos físicos, networkers (Que vendan
+                productos), E-commerce, personas que estén comenzando su negocio.</p>
             <br>
             <img src="img/Logo1.png" class=" mx-auto d-block" alt="IconoPrincipal" width="150" height="150">
             <br>
@@ -69,9 +97,23 @@
     </div>
     <div class="text-bg-primary p-3 text-center">Ruta Fit 2020 | Todos los derechos reservados ©</div>
 
-
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <!-- Boostrap -->
     <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const myForm = document.getElementById('myForm');
+        const videoContainer = document.getElementById('video-container');
+    
+        // Agregar un event listener al formulario para detectar su envío
+        myForm.addEventListener('submit', function(event) {
+            // Prevenir el envío del formulario por defecto
+            event.preventDefault();
+    
+            // Mostrar el video después de enviar el formulario
+            videoContainer.style.display = 'block';
+        });
+    </script>
 </body>
 
 </html>

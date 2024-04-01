@@ -2440,6 +2440,11 @@ progress {
     border-radius: var(--bs-border-radius);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
+/*
+.form-control.error{
+    border-color: var(--bs-red);
+}
+*/
 
 @media (prefers-reduced-motion:reduce) {
     .form-control {
@@ -13912,3 +13917,13 @@ fieldset:disabled .btn {
   
 /*# sourceMappingURL=bootstrap.min.css.map */
 
+/* Estilo para campos de entrada con error */
+.error {
+    border-color: red; /* Cambia el borde a rojo */
+  }
+  
+  /* Estilo para el elemento padre de un campo de entrada con error */
+  .error-parent {
+    /* Puedes agregar estilos adicionales según tus necesidades, como un fondo rojo, por ejemplo */
+    background-color: #ffeaea; /* Fondo ligeramente rojo */
+  }
